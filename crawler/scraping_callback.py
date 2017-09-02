@@ -13,9 +13,9 @@ class ScrapingCallback(object):
 
         lis = tree.xpath(".//div[@class='article']/ol[@class='grid_view']/li")
         for li in lis:
-            ranking = li.xpath("./div[@class='item']/div[@class='pic']/em")[0].text_content()
-            movie_name = li.xpath("./div[@class='item']/div[@class='info']//span[@class='title']")[0].text_content()
-            self.writer.writerow([ranking.encode('utf-8'), movie_name.encode('utf-8')])
+            ranking = li.xpath("./div[@class='item']/div[@class='pic']/em")[0].text_content().encode('utf-8')
+            movie_name = li.xpath("./div[@class='item']/div[@class='info']//span[@class='title']")[0].text_content().encode('utf-8')
+            self.writer.writerow([ranking, movie_name])
 
         link = tree.xpath(".//div[@class='article']/div[@class='paginator']/span[@class='next']/a")
         return link[0].get('href') if len(link) > 0 else None
